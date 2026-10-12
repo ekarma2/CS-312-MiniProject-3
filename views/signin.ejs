@@ -1,0 +1,28 @@
+<%- include('header', { title: 'Sign In' }) %>
+
+<div class="auth-card card shadow-sm mx-auto">
+    <div class="card-body p-4">
+        <h1 class="h3 mb-3">Sign In</h1>
+
+        <!--Show error, ex: wrong user ID or password-->
+        <% if (error) { %>
+            <div class="alert alert-danger"><%= error %></div>
+        <% } %>
+
+        <form action="/signin" method="POST">
+            <div class="mb-3">
+                <label for="user_id" class="form-label">User ID</label>
+                <input type="text" id="user_id" name="user_id" class="form-control" value="<%= form.user_id || '' %>" required>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" id="password" name="password" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Sign In</button>
+        </form>
+
+        <p class="mt-3 mb-0 text-center">New here? <a href="/signup">Create an account</a></p>
+    </div>
+</div>
+
+<%- include('footer') %>
