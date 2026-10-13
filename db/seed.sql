@@ -1,25 +1,25 @@
 -- Run after schema.sql to give the app starting users and posts
 
--- 3 starting users (sign in with any user_id / password pair below)
+-- Starting users 
 INSERT INTO users (user_id, password, name) VALUES
-  ('eli',   'eli123',   'Eli Vogelhuber'),
+  ('Eli',   'Eli123',   'Eli Vogelhuber'),
   ('maya',  'maya123',  'Maya Chen'),
-  ('jordan','jordan123','Jordan Brooks');
+  ('Lebron','Lebron123','Lebron James');
 
--- 5 starting blog posts
+-- Starting blog posts
 INSERT INTO blogs (creator_name, creator_user_id, title, body, date_created) VALUES
-  ('Eli Vogelhuber', 'eli', 'Welcome to the Blog',
-   'This is the first post on the blog. Sign up for an account, write a post, and come back later - everything is saved in PostgreSQL now, so nothing disappears when the server restarts.',
+  ('Eli Vogelhuber', 'Eli', 'Hello World',
+   'This is my first post. Welcome to the blog!',
    '2026-09-01 09:15:00'),
-  ('Maya Chen', 'maya', 'Five Things I Learned Building My First Express App',
-   'Routes are just functions, middleware runs in order, EJS makes templates painless, nodemon saves a lot of restarts, and always redirect after a POST so a refresh does not resubmit the form.',
+  ('Maya Chen', 'maya', 'My Favorite Food',
+   'I love pasta. It is easy to make and tastes great.',
    '2026-09-05 14:30:00'),
-  ('Jordan Brooks', 'jordan', 'Why Use a Database Instead of an Array?',
-   'An array in memory is wiped every time the server stops. A database keeps the data on disk, lets many users share it, and gives us SQL to search, update, and delete exactly the rows we want.',
+  ('Lebron James', 'Lebron', 'Game Day',
+   'Big game tonight. Time to lock in! ',
    '2026-09-12 18:45:00'),
-  ('Eli Vogelhuber', 'eli', 'Weekend Hike Recap',
-   'Took the trail up to the lookout on Saturday. Three hours up, an hour and a half down, and the view was worth every switchback. Bring more water than you think you need.',
+  ('Eli Vogelhuber', 'Eli', 'Weekend Plans',
+   'This weekend I am going for a hike. I wonder what Lebrons doing.',
    '2026-09-20 11:00:00'),
-  ('Maya Chen', 'maya', 'Quick Tip: Parameterized Queries',
-   'Never build SQL by gluing user input into a string. Use placeholders like $1 and $2 and pass the values separately. The pg library handles escaping and you avoid SQL injection.',
+  ('Maya Chen', 'maya', 'Study Tips',
+   'Eat lots of pasta. It makes studying easier.',
    '2026-09-28 20:10:00');

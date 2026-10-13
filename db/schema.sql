@@ -1,10 +1,8 @@
--- Run this inside the BlogDB database (pgAdmin > BlogDB > Query Tool)
--- Create the database first in pgAdmin: right click Databases > Create > Database > "BlogDB"
 
 DROP TABLE IF EXISTS blogs;
 DROP TABLE IF EXISTS users;
 
--- users table: one row per account
+-- Users table
 CREATE TABLE users
 (
   user_id    VARCHAR(255) PRIMARY KEY,
@@ -13,7 +11,7 @@ CREATE TABLE users
   date_joined TIMESTAMP NOT NULL DEFAULT NOW()
 );
 
--- blogs table: one row per post, linked to the user who wrote it
+-- blogs table
 CREATE TABLE blogs
 (
   blog_id         SERIAL PRIMARY KEY,

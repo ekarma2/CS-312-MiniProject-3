@@ -1,10 +1,13 @@
 require('dotenv').config();
+// Get express object
 const express = require('express');
 const session = require('express-session');
 const pool = require('./db');
+// set app object
 const app = express();
 
 app.set('view engine', 'ejs');
+// middleware
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 app.use(session({
@@ -65,15 +68,17 @@ app.post('/signout', (req, res) =>
 });
 
 // ---------- Posts ----------
-// blog feed, newest first
+// define route to display all posts, newest first
 app.get('/', requireLogin, async (req, res) =>
 {
   const result = await pool.query('SELECT * FROM blogs ORDER BY date_created DESC');
   res.render('index', { posts: result.rows });
 });
 
+// show create post form
 app.get('/posts/new', requireLogin, (req, res) => res.render('new'));
 
+// handle post form submission
 app.post('/posts', requireLogin, async (req, res) =>
 {
   const { title, body } = req.body;
@@ -82,10 +87,11 @@ app.post('/posts', requireLogin, async (req, res) =>
     'INSERT INTO blogs (creator_name, creator_user_id, title, body, date_created) VALUES ($1, $2, $3, $4, NOW())',
     [name, user_id, title, body]
   );
+  // redirect to posts page
   res.redirect('/');
 });
 
-// only the creator may load the edit form
+// add route to edit form (only the creator may load it)
 app.get('/posts/:id/edit', requireLogin, async (req, res) =>
 {
   const result = await pool.query(
@@ -96,6 +102,7 @@ app.get('/posts/:id/edit', requireLogin, async (req, res) =>
   res.render('edit', { post: result.rows[0] });
 });
 
+// listen to post requests and update post content
 // the creator check is part of the WHERE clause, so others can't update
 app.post('/posts/:id', requireLogin, async (req, res) =>
 {
@@ -108,6 +115,7 @@ app.post('/posts/:id', requireLogin, async (req, res) =>
   res.redirect('/');
 });
 
+// match url with text and capture ID, then delete the post
 app.post('/posts/:id/delete', requireLogin, async (req, res) =>
 {
   const result = await pool.query(
@@ -118,4 +126,5 @@ app.post('/posts/:id/delete', requireLogin, async (req, res) =>
   res.redirect('/');
 });
 
+// start server on port 3000
 app.listen(3000, () => console.log('Server running on port 3000'));

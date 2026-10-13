@@ -1,6 +1,6 @@
 const { Pool } = require('pg');
 
-// Connection settings come from env vars, defaulting to the local BlogDB
+// Connection settings from env vars
 module.exports = new Pool({
   host: process.env.PGHOST || 'localhost',
   port: process.env.PGPORT || 5432,

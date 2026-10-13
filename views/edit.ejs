@@ -8,11 +8,14 @@
     <link href="/styles.css" rel="stylesheet">
 </head>
 <body>
+<!--Header-->
 <%- include('header') %>
 <main>
 <div class="container form-card">
     <h1>Edit Post</h1>
+    <!--Get specific post off ID-->
     <form action="/posts/<%= post.blog_id %>" method="POST">
+        <!--Fill with post content-->
         <div class="mb-3"><label class="form-label">Title</label>
             <input type="text" name="title" class="form-control" maxlength="255" value="<%= post.title %>" required></div>
         <div class="mb-3"><label class="form-label">Body</label>

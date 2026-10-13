@@ -8,22 +8,30 @@
     <link href="/styles.css" rel="stylesheet">
 </head>
 <body>
+<!--Header-->
 <%- include('header') %>
 <main>
+<!--Posts-->
 <div class="container">
     <a href="/posts/new" class="btn btn-primary mb-4">+ New Post</a>
+    <!--Iterate through posts, show newest first-->
     <% posts.forEach(post => { %>
         <div class="card post-card shadow-sm mb-3">
             <div class="card-body">
+                <!--Post Content-->
                 <h2 class="card-title h4"><%= post.title %></h2>
                 <h6 class="card-subtitle mb-2 text-muted">By <%= post.creator_name %></h6>
                 <p class="card-text post-body"><%= post.body %></p>
+                <!--Display time of post-->
                 <p class="text-muted small mb-3">
                     Created: <%= post.date_created.toLocaleString() %>
                     <% if (post.date_updated) { %> · Edited: <%= post.date_updated.toLocaleString() %><% } %>
                 </p>
+                <!--Buttons-->
                 <% if (user && user.user_id === post.creator_user_id) { %>
+                    <!--Edit button-->
                     <a href="/posts/<%= post.blog_id %>/edit" class="btn btn-sm btn-outline-secondary">Edit</a>
+                    <!--Delete button-->
                     <form action="/posts/<%= post.blog_id %>/delete" method="POST" class="d-inline"
                           onsubmit="return confirm('Delete this post?');">
                         <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
